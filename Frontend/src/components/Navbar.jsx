@@ -1,99 +1,109 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { LuSunMoon } from "react-icons/lu";
 import { IoSearch } from "react-icons/io5";
-import { AiOutlineMenuFold } from "react-icons/ai";
-import { ImCancelCircle } from "react-icons/im";
+import { CiMenuBurger } from "react-icons/ci";
+import { MdOutlineCancel } from "react-icons/md";
 
 const Navbar = () => {
-    const [menu, setMenu] = useState(true);
+  const [menu, setMenu] = useState(true);
+  const [dark, setDark] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      setDark(true);
+    }
+
+  }, []);
+
+  const handleMode = () => {
+    const newTheme = !dark;
+    setDark(newTheme);
+    if (newTheme) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem("theme", "dark");
+    }
+    else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem("theme", "light");
+    }
+  };
+
+  const buttons = ["Home", "Course", "Contact", "About"];
+
   return (
-    <nav className="flex justify-between items-center">
-      <div className="flex items-center cursor-pointer hover:scale-105 transition-all">
-        <h1 className="text-[16px] xl:text-[38px] font-bold xl:font-extrabold text-black/75">
+    <nav className="flex justify-between items-center ">
+      <div className="">
+        <h1
+          className="font-bold xl:font-extrabold text-[16px] xl:text-[32px] hover:cursor-pointer
+          hover:scale-105 transition-all"
+        >
           Book Store
         </h1>
       </div>
-      <div className="hidden xl:block  item-center">
-        <button
-          className="text-[16px] font-semibold text-gray-900/90 hover:scale-110 transition-all 
-                hover:cursor-pointer  border-1 px-4 py-1 rounded-xl hover:bg-emerald-600
-                hover:text-white border-gray-400 mr-8"
-        >
-          Home
-        </button>
-        <button
-          className="text-[16px] font-semibold text-gray-900/90 hover:scale-110 transition-all 
-                hover:cursor-pointer  border-1 px-4 py-1 rounded-xl hover:bg-emerald-600
-                hover:text-white border-gray-400 mr-8"
-        >
-          Course
-        </button>
-        <button
-          className="text-[16px] font-semibold text-gray-900/90 hover:scale-110 transition-all 
-                hover:cursor-pointer  border-1 px-4 py-1 rounded-xl hover:bg-emerald-600
-                hover:text-white border-gray-400 mr-8"
-        >
-          Contact
-        </button>
-        <button
-          className="text-[16px] font-semibold text-gray-900/90 hover:scale-110 transition-all 
-                hover:cursor-pointer  border-1 px-4 py-1 rounded-xl hover:bg-emerald-600
-                hover:text-white border-gray-400"
-        >
-          About
-        </button>
-      </div>
-      <div className="flex items-center gap-5">
-        <div className="flex items-center border border-gray-300 rounded-lg px-4 py-2 w-1/2">
-          <IoSearch className="text-gray-400 text-lg" />
+      <div className="flex items-center justify-between gap-4 xl:gap-8">
+        <div className="hidden xl:block items-center">
+          {buttons.map((btn, index) => (
+            <button
+              className="ml-6 dark:border dark:border-slate-100 rounded-lg px-3 py-1 font-medium
+              border border-slate-500 hover:cursor-pointer hover:scale-110 transition-all hover:bg-emerald-400"
+              key={index}
+            >
+              {btn}
+            </button>
+          ))}
+        </div>
+        <div className="items-center border rounded-md px-2 dark:border-slate-200 hidden xl:block">
+          <div className="flex items-center">
+            <IoSearch className="xl:text-xl absolute" />
+            <div className="hidden xl:block">
+              <input
+                type="text"
+                placeholder="Search..."
+                className="ml-5  rounded-md px-2 py-1 dark:placeholder:text-gray-200  focus:outline-none"
+              />
+            </div>
+          </div>
+        </div>
 
-          <input
-            type="text"
-            placeholder="Search..."
-            className="flex-1 bg-transparent outline-none text-sm"
+        <div onClick={handleMode}>
+          <LuSunMoon
+            className="dark:text-white text-xl xl:text-3xl hover:cursor-pointer 
+                      hover:scale-110 transition-all "
           />
         </div>
-        <button
-          className="text-[14px] xl:text-[18px]  text-white/80 font-bold bg-emerald-700 hover:scale-110 transition-all 
-                hover:cursor-pointer  border-1 px-3 xl:px-6 py-2 xl:rounded-xl rounded-lg hover:bg-emerald-600
-                hover:text-white border-gray-400 "
-        >
-          Login
-        </button>
-      </div>
-      <div 
-        className="block xl:hidden hover:cursor-pointer hover:scale-115 transition-all relative"
-        onClick={() => setMenu(!menu)}
-      >
-       {
-            menu ? <AiOutlineMenuFold className="text-3xl" /> : <ImCancelCircle className="text-3xl" />
-       }
-      </div>
-      {/* for mobile*/}
-      <div className="relative block xl:hidden">
-        {
-            !menu && <div className="absolute right-[7px] top-8 border-1 bg-gray-200 rounded-xl px-10 py-2 ">
-                <button 
-                    className="text-[16px] text-gray-950 font-semibold border-1 border-gray-500 px-3
-                    py-1 rounded-lg hover:scale-105 transition-all hover:bg-emerald-500 hover:text-white
-                    hover:cursor-pointer"
-                >Home</button>
+
+        <div className="flex item-center ">
+          <button
+            className="font-semibold text-[14px] xl:text-[20px] border px-2 xl:px-4 py-1 rounded-xl dark:border-slate-200
+          hover:cursor-pointer hover:scale-110 transition-all bg-emerald-700 text-slate-200 hover:bg-emerald-400"
+          >
+            Login
+          </button>
+        </div>
+
+        <div className="block xl:hidden" onClick={() => setMenu(!menu)}>
+          {menu ? (
+            <CiMenuBurger className="dark:text-white text-xl hover:cursor-pointer hover:scale-110 tranisition-all" />
+          ) : (
+            <MdOutlineCancel className="text-2xl hover:cursor-pointer hover:scale-110 transition-all" />
+          )}
+          {!menu && (
+            <div className="absolute right-5 top-16 border dark:border-slate-600 px-6 py-1 rounded-2xl">
+              {buttons.map((btn, index) => (
                 <button
-                    className="text-[16px] text-gray-950 font-semibold border-1 border-gray-500 px-3
-                    py-1 rounded-lg hover:scale-105 transition-all hover:bg-emerald-500 hover:text-white
-                    hover:cursor-pointer mt-2"
-                >Course</button>
-                <button
-                    className="text-[16px] text-gray-950 font-semibold border-1 border-gray-500 px-3
-                    py-1 rounded-lg hover:scale-105 transition-all hover:bg-emerald-500 hover:text-white
-                    hover:cursor-pointer mt-2"
-                >Contact</button>
-                <button
-                    className="text-[16px] text-gray-950 font-semibold border-1 border-gray-500 px-3
-                    py-1 rounded-lg hover:scale-105 transition-all hover:bg-emerald-500 hover:text-white
-                    hover:cursor-pointer mt-2"
-                >About</button>
+                  className="block text-[14px] font-semibold mt-2
+                     px-2 xl:px-4 py-1 
+                    hover:cursor-pointer hover:scale-110 transition-all hover:border hover:rounded-md hover:px-3 hover:py-1 text-slate-200 hover:bg-emerald-400"
+                    key={index}
+                >
+                  {btn}
+                </button>
+              ))}
             </div>
-        }
+          )}
+        </div>
       </div>
     </nav>
   );

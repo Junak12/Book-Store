@@ -5,7 +5,9 @@ import Footer from '../components/Footer'
 
 const Root = () => {
   return (
-    <div className='px-8 xl:px-[120px] xl:mx-auto bg-gray-200/30'>
+    <div 
+      className='px-8 xl:px-[120px] xl:mx-auto'
+    >
         <div className='py-4'>
             <Navbar />
         </div>
