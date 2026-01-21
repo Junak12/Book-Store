@@ -90,12 +90,12 @@ const Navbar = () => {
             <MdOutlineCancel className="text-2xl hover:cursor-pointer hover:scale-110 transition-all" />
           )}
           {!menu && (
-            <div className="absolute right-5 top-16 border dark:border-slate-600 px-6 py-1 rounded-2xl">
+            <div className="absolute right-1 top-12 border dark:border-slate-600 px-6 py-1 rounded-2xl">
               {buttons.map((btn, index) => (
                 <button
                   className="block text-[14px] font-semibold mt-2
                      px-2 xl:px-4 py-1 
-                    hover:cursor-pointer hover:scale-110 transition-all hover:border hover:rounded-md hover:px-3 hover:py-1 text-slate-200 hover:bg-emerald-400"
+                    hover:cursor-pointer hover:scale-110 transition-all hover:border hover:rounded-md hover:px-3 hover:py-1 dark:text-white text-gray-900 hover:bg-emerald-400"
                     key={index}
                 >
                   {btn}
