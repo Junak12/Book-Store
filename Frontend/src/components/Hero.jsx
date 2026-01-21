@@ -5,7 +5,7 @@ import { MdOutlineEmail } from "react-icons/md";
 const Hero = () => {
   return (
     <div>
-      <div className="flex flex-col xl:flex-row mt-2 xl:mt-32 ">
+      <div className="flex flex-col xl:flex-row mt-2 xl:mt-25 ">
         <div className="w-full xl:w-1/2 space-y-6 xl:space-y-12 order-2 xl:order-1 mt-10 xl:mt-0">
           <h1 className="text-xl xl:text-4xl font-bold">
             Hello, welcome here to learn <br /> something{" "}

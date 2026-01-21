@@ -33,7 +33,10 @@ const Navbar = () => {
   const buttons = ["Home", "Course", "Contact", "About"];
 
   return (
-    <nav className="flex justify-between items-center border-b shadow-sm dark:shadow-slate-200 py-2 xl:py-4 px-4 xl:px-2 ">
+    <nav
+      className="flex justify-between items-center border-b shadow-sm dark:shadow-slate-200 py-2 xl:py-4 px-4 xl:px-2
+      sticky top-0 z-50"
+    >
       <div className="">
         <h1
           className="font-bold xl:font-extrabold text-[16px] xl:text-[32px] hover:cursor-pointer
